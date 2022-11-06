@@ -110,7 +110,6 @@ header nav h1{
     border-inline: 0.125em solid var(--clr1);
     color: var(--clr1);
     top: -1.5em;
-    /* transform: translateX(-50%, -50%) ; */
     font-size: 1.3em;
     padding: 0 0.6em;
     letter-spacing: 0.1em;
