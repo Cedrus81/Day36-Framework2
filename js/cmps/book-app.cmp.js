@@ -12,9 +12,10 @@ export default {
         </div>
 
         <book-filters @filtered="setFilter" />
-
+        
+        <--! following v-if was put on comment to work with github -->
+        <--! v-if="books" -->
         <book-list 
-        v-if="books" 
         :books="booksToShow" 
         @selected="selectBook" />
         
