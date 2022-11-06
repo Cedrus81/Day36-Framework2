@@ -1,7 +1,7 @@
 export default {
     props: ['text'],
     template: `
-    <p>{{ cutText }}</p>
+    <p>{{shownText}}</p>
     <button class="read-more" 
     v-if="showButton"
     @click="showFullText"
@@ -13,19 +13,27 @@ export default {
             shownText: ''
         }
     },
+    created() {
+        this.showButton = false
+        this.cutText
+    },
     computed: {
+
         cutText() {
             if (this.text.length > 100) {
+                console.log(this.text.length)
                 this.showButton = true
-                this.shownText = this.text.slice(0, 100) + '...'
+                this.shownText = this.text.substring(0, 100) + '...'
             }
             else this.shownText = this.text
-            return shownText
+            console.log(this.shownText)
         },
+    },
+    methods: {
         showFullText() {
             this.showButton = false
             this.shownText = this.text
         },
-
     }
+
 }
