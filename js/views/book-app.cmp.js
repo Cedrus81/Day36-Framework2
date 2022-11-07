@@ -1,17 +1,10 @@
 import { bookService } from '../services/book-service.js'
+import { eventBus } from '../services/event-bus.service.js'
+
+
 import bookFilters from '../cmps/book-filters.cmp.js'
 import bookList from '../cmps/book-list.cmp.js'
 // import bookDetails from './book-details.cmp.js'
-
-{/* <book-details 
-:class="screenStyle"
-:book="selectedBook" />
- */}
-// isScreen: false,
-// <div class="main-screen" 
-// @click="isScreen = !isScreen" 
-// :class="screenStyle">
-// </div>
 
 export default {
     template: `

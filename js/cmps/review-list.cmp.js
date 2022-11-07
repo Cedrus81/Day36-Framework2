@@ -19,7 +19,7 @@ export default {
             return '★'.repeat(review.rating)
         },
         deleteReview(idx) {
-            this.reviews.splice(idx, 1)
+            this.$emit('reviewDeleted', idx)
         }
     }
 }

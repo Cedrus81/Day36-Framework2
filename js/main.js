@@ -6,14 +6,17 @@ import appHeader from './cmps/app-header.js'
 import homePage from './views/home-page.cmp.js'
 import aboutPage from './views/about-page.cmp.js'
 import bookDetails from './views/book-details.cmp.js'
+import userMsg from './cmps/user-msg.cmp.js'
 
 const options = {
     template: `<app-header />
     <router-view />
+    <user-msg />
     `,
     components: {
         bookApp,
-        appHeader
+        appHeader,
+        userMsg,
     }
 }
 
@@ -36,10 +39,6 @@ const routerOptions = {
             path: '/books/:id',
             component: bookDetails
         },
-        // {
-        //     path: '/books/edit/:id?',
-        //     component: bookEdit
-        // },
     ]
 }
 

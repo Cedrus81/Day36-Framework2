@@ -11,6 +11,7 @@ export const bookService = {
     save,
     getEmptyBook,
     addReview,
+    deleteReview
 }
 
 function query() {
@@ -67,5 +68,9 @@ function addReview(bookId, review) {
             book.reviews.push(review)
             save(book)
         })
+}
 
+function deleteReview(book, idx) {
+    book.reviews.splice(idx, 1)
+    save(book)
 }

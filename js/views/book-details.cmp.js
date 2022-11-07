@@ -2,6 +2,7 @@ import longText from '../cmps/long-text.cmp.js'
 import addReview from '../cmps/add-review.cmp.js'
 import reviewList from '../cmps/review-list.cmp.js'
 import { bookService } from '../services/book-service.js';
+import { storageService } from '../services/async-storage.service.js';
 
 export default {
     template: `
@@ -25,7 +26,8 @@ export default {
             <add-review :id="book.id" />
             <review-list 
             v-if="book.reviews"
-            :reviews="book.reviews" />
+            :reviews="book.reviews" 
+            :reviewDeleted="reviewDeleted"/>
         </div>
     </main> `,
     data() {
@@ -65,6 +67,11 @@ export default {
         priceLevel() {
             if (this.book.listPrice)
                 return { expensive: this.book.listPrice.amount > 150, cheap: this.book.listPrice.amount < 20 }
+        },
+    },
+    methods: {
+        reviewDeleted(idx) {
+            storageService.deleteReview(book, idx)
         }
     },
     components: {
