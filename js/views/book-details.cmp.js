@@ -1,8 +1,9 @@
 import longText from '../cmps/long-text.cmp.js'
 import addReview from '../cmps/add-review.cmp.js'
 import reviewList from '../cmps/review-list.cmp.js'
+
 import { bookService } from '../services/book-service.js';
-import { storageService } from '../services/async-storage.service.js';
+import { eventBus } from "../services/event-bus.service.js"
 
 export default {
     template: `
@@ -27,7 +28,7 @@ export default {
             <review-list 
             v-if="book.reviews"
             :reviews="book.reviews" 
-            :reviewDeleted="reviewDeleted"/>
+            @reviewDeleted="reviewDeleted"/>
         </div>
     </main> `,
     data() {
@@ -38,6 +39,7 @@ export default {
     created() {
         bookService.get(this.$route.params.id)
             .then(book => this.book = book)
+        eventBus.on()
     },
     computed: {
         formattedAuthors() {
@@ -71,7 +73,7 @@ export default {
     },
     methods: {
         reviewDeleted(idx) {
-            storageService.deleteReview(book, idx)
+            bookService.deleteReview(this.book.id, idx)
         }
     },
     components: {

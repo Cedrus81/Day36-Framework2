@@ -288,6 +288,27 @@ header nav{
     filter: invert(62%) sepia(43%) saturate(1183%) hue-rotate(317deg) brightness(101%) contrast(100%);
 }
 
+/* USER MESSAGE */
+.user-msg{
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 1em;
+    font-size: 1.8em;
+    padding: 1em;
+    font-weight: 600;
+}
+
+.user-msg.success{
+    background-color: var(--clr4);
+    color: var(--clr1);
+}
+
+.user-msg.error{
+    background-color: var(--clr1);
+    color: var(--clr2);
+}
 /* FLEX CLASSES */
 
 .flex{

@@ -70,7 +70,10 @@ function addReview(bookId, review) {
         })
 }
 
-function deleteReview(book, idx) {
-    book.reviews.splice(idx, 1)
-    save(book)
+function deleteReview(bookId, idx) {
+    get(bookId)
+        .then(book => {
+            book.reviews.splice(idx, 1)
+            save(book)
+        })
 }
