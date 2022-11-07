@@ -32,7 +32,10 @@ export default {
         }
     },
     created() {
-        this.books = bookService.query()
+        bookService.query()
+            .then(books => {
+                this.books = books
+            })
     },
     methods: {
         setFilter(newFilter) {
