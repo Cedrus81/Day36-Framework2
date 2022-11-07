@@ -27,7 +27,7 @@ export default {
     methods: {
         filter() {
             this.newFilter.price = this.newFilter.price || Infinity;
-            this.$emit('filtered', this.newFilter)
+            this.$emit('filtered', { text: this.newFilter.text, price: this.newFilter.price })
         }
     }
 }

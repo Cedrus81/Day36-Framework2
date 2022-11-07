@@ -72,7 +72,7 @@ header nav h1{
 
 .form-group .input-box{
     position: relative;
-    width: 100%;
+    max-width: 100%;
     padding: 1em;
 }
 
@@ -96,7 +96,7 @@ header nav h1{
     z-index: 2;
     color: var(--clr4);
     position: relative;
-    left: -20em;
+    right: 20em;
     pointer-events: none;
     font-size: 1.5em;
     font-weight: 700;

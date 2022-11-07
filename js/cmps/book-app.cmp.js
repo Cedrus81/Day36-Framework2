@@ -3,6 +3,7 @@ import bookFilters from './book-filters.cmp.js'
 import bookList from './book-list.cmp.js'
 import bookDetails from './book-details.cmp.js'
 
+
 export default {
     template: `
         <main>
@@ -12,10 +13,8 @@ export default {
         </div>
 
         <book-filters @filtered="setFilter" />
-        
-        <--! following v-if was put on comment to work with github -->
-        <--! v-if="books" -->
-        <book-list 
+
+        <book-list
         :books="booksToShow" 
         @selected="selectBook" />
         
@@ -28,7 +27,7 @@ export default {
         return {
             isScreen: false,
             selectedBook: '',
-            filters: { text: '', price: Infinity },
+            filterBy: null,
             books: null
         }
     },
@@ -37,7 +36,7 @@ export default {
     },
     methods: {
         setFilter(newFilter) {
-            this.filters = newFilter
+            this.filterBy = newFilter
         },
         selectBook(book) {
             this.selectedBook = book
@@ -46,8 +45,9 @@ export default {
     },
     computed: {
         booksToShow() {
-            const regex = new RegExp(this.filters.text, 'i')
-            return this.books.filter(book => (book.listPrice.amount < this.filters.price && regex.test(book.title)))
+            if (!this.filterBy) return this.books
+            const regex = new RegExp(this.filterBy.text, 'i')
+            return this.books.filter(book => (book.listPrice.amount < this.filterBy.price && regex.test(book.title)))
         },
         screenStyle() {
             return { on: this.isScreen === true }

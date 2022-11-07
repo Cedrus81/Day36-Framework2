@@ -1,39 +1,33 @@
 export default {
-    props: ['text'],
+    props: ['text', 'maxLength'],
     template: `
-    <p>{{shownText}}</p>
+    <p>{{ displayTxt }}</p>
     <button class="read-more" 
-    v-if="showButton"
+    v-if="isTxtLong"
     @click="showFullText"
-    >Read more</button>
+    >{{ buttonTxt }}</button>
     `,
     data() {
         return {
-            showButton: false,
-            shownText: ''
+            isReadMore: false,
         }
-    },
-    created() {
-        this.showButton = false
-        this.cutText
-    },
-    computed: {
-
-        cutText() {
-            if (this.text.length > 100) {
-                console.log(this.text.length)
-                this.showButton = true
-                this.shownText = this.text.substring(0, 100) + '...'
-            }
-            else this.shownText = this.text
-            console.log(this.shownText)
-        },
     },
     methods: {
         showFullText() {
-            this.showButton = false
-            this.shownText = this.text
+            this.isReadMore = !this.isReadMore
         },
-    }
+    },
+    computed: {
+        displayTxt() {
+            if (this.isReadMore || !this.isTxtLong) return this.text
+            return this.text.slice(0, this.maxLength) + '...'
+        },
+        buttonTxt() {
+            return this.isReadMore ? 'less' : 'more'
+        },
+        isTxtLong() {
+            return this.text.length > this.maxLength
+        }
+    },
 
 }
