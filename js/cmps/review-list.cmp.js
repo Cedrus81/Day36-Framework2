@@ -1,0 +1,25 @@
+export default {
+    props: ['reviews'],
+    template: `
+    <ul class="review-list">
+        <h1>This book's reviews</h1>
+        <li v-for="(review, idx) in reviews" class="review-card">
+            <section class="review-header flex space-between">
+            <h1>{{review.name}}</h1>
+            <img class="delete-icon" src="../../icons/delete.png" alt="" @click="deleteReview(idx)" />
+            </section>
+            <h2>{{ getStars(review) }}</h2>
+            <h4>{{review.reviewText}}</h4>
+            <h5>Read at: {{review.date}}</h5>
+        </li>
+    </ul>
+    `,
+    methods: {
+        getStars(review) {
+            return '★'.repeat(review.rating)
+        },
+        deleteReview(idx) {
+            this.reviews.splice(idx, 1)
+        }
+    }
+}

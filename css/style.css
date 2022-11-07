@@ -209,6 +209,11 @@ header nav{
     
 }
 
+.details-container{
+    max-width: 1340px;
+    margin: auto;
+}
+
 .book-info{
     max-width: 50%;
     min-width: 300px;
@@ -247,9 +252,6 @@ header nav{
     font-weight: 600;
     padding:1em
 }
-.book-details img{
-    margin-inline-end: 4em;
-}
 
 .rating .star{
     height: 2.5em;
@@ -266,6 +268,25 @@ header nav{
     color: var(--clr4);
 }
 
+/* REVIEWS */
+.review-card {
+    background-color: var(--clr1);
+    border-radius: 0.5em;
+    padding: 1em;
+    width: max-content;
+    margin-block-end: 1em;
+    color: var(--clr5);
+}
+
+
+.delete-icon{
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.delete-icon:hover{
+    filter: invert(62%) sepia(43%) saturate(1183%) hue-rotate(317deg) brightness(101%) contrast(100%);
+}
 
 /* FLEX CLASSES */
 

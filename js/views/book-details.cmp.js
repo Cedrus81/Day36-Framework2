@@ -1,27 +1,32 @@
 import longText from '../cmps/long-text.cmp.js'
 import addReview from '../cmps/add-review.cmp.js'
-
+import reviewList from '../cmps/review-list.cmp.js'
 import { bookService } from '../services/book-service.js';
 
 export default {
     template: `
-    <main class="book-details flex wrap space-between" v-if="book">
-        <div class="book-info flex column"> 
-            <h1 class="book-title">{{ book.title }}</h1>
-            <h1>// By {{formattedAuthors}}</h1>
-            <h2>{{ setLevel }}</h2>
-            <h2>{{ setAge }}</h2>
+    <main class="book-details" >
+        <div class="details-container flex wrap space-between alig" v-if="book">
+            <div class="book-info flex column"> 
+                <h1 class="book-title">{{ book.title }}</h1>
+                <h1>// By {{formattedAuthors}}</h1>
+                <h2>{{ setLevel }}</h2>
+                <h2>{{ setAge }}</h2>
 
-            <long-text 
-            v-if="book.description" 
-            :text="book.description"
-                :maxLength="100"
-                />
+                <long-text 
+                v-if="book.description" 
+                :text="book.description"
+                    :maxLength="100"
+                    />
 
-            <h2 :class="priceLevel">{{ formattedPrice }}</h2>
+                <h2 :class="priceLevel">{{ formattedPrice }}</h2>
+            </div>
+            <img :src="book.thumbnail" alt="" />
+            <add-review :id="book.id" />
+            <review-list 
+            v-if="book.reviews"
+            :reviews="book.reviews" />
         </div>
-        <img :src="book.thumbnail" alt="" />
-        <add-review :id="book.id" />
     </main> `,
     data() {
         return {
@@ -65,5 +70,6 @@ export default {
     components: {
         longText,
         addReview,
+        reviewList
     }
 }

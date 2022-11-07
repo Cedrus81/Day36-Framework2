@@ -51,6 +51,13 @@ export default {
             }
             console.log(review)
             bookService.addReview(this.id, review)
+            this.resetForm
+        },
+        resetForm() {
+            this.name = null
+            this.date = null
+            this.rating = 5
+            this.reviewText = ''
         },
         setRating(index) {
             this.rating = index;
