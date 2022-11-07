@@ -10,6 +10,7 @@ export const bookService = {
     remove,
     save,
     getEmptyBook,
+    addReview,
 }
 
 function query() {
@@ -57,14 +58,14 @@ function _createBooks() {
                 utilService.saveToStorage(BOOKS_KEY, books)
             })
     }
-    // return books
 }
-///
-// function _createBook() {
-//     const car = {
-//         id: utilService.makeId(),
-//         vendor,
-//         maxSpeed,
-//     }
-//     return car
-// }
+
+function addReview(bookId, review) {
+    get(bookId)
+        .then(book => {
+            if (!book.reviews) book.reviews = []
+            book.reviews.push(review)
+            save(book)
+        })
+
+}

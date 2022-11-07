@@ -1,24 +1,31 @@
 import longText from '../cmps/long-text.cmp.js'
+import addReview from '../cmps/add-review.cmp.js'
+
 import { bookService } from '../services/book-service.js';
+
 export default {
     template: `
-    <section v-if="book" class="modal on flex column align-center">
-        <img :src="book.thumbnail" alt="" />
-        <h1>{{ book.title }} // By {{formattedAuthors}}</h1>
-        <h2>{{ setLevel }}</h2>
-        <h2>{{ setAge }}</h2>
-        <p>
+    <main class="book-details flex wrap space-between" v-if="book">
+        <div class="book-info flex column"> 
+            <h1 class="book-title">{{ book.title }}</h1>
+            <h1>// By {{formattedAuthors}}</h1>
+            <h2>{{ setLevel }}</h2>
+            <h2>{{ setAge }}</h2>
+
             <long-text 
             v-if="book.description" 
             :text="book.description"
-            :maxLength="100"
-            />
-        </p>
-        <h2 :class="priceLevel">{{ formattedPrice }}</h2>
-    </section>`,
+                :maxLength="100"
+                />
+
+            <h2 :class="priceLevel">{{ formattedPrice }}</h2>
+        </div>
+        <img :src="book.thumbnail" alt="" />
+        <add-review :id="book.id" />
+    </main> `,
     data() {
         return {
-            book: null
+            book: null,
         }
     },
     created() {
@@ -56,6 +63,7 @@ export default {
         }
     },
     components: {
-        longText
+        longText,
+        addReview,
     }
 }

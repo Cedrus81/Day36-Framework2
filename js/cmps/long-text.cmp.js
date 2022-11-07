@@ -23,7 +23,7 @@ export default {
             return this.text.slice(0, this.maxLength) + '...'
         },
         buttonTxt() {
-            return this.isReadMore ? 'less' : 'more'
+            return this.isReadMore ? 'Less' : 'Read more'
         },
         isTxtLong() {
             return this.text.length > this.maxLength
