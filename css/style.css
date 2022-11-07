@@ -33,19 +33,41 @@ header{
     background-color: var(--clr1);
     user-select: none;
 }
+
 header nav{
     max-width: 1320px;
+    margin-inline: 1em;
+    padding: 1.25em;
+}
+
+.logo{
     color: var(--clr2);
-    margin: auto;
     letter-spacing: 0.15em;
     gap: 2.5em;
 }
-header nav h1{
+
+.logo h1{
     font-size: 4em;
 }
-.header-icon{
+.logo .header-icon{
     height: 4em;
     filter: invert(62%) sepia(43%) saturate(1183%) hue-rotate(317deg) brightness(101%) contrast(100%);
+}
+
+.nav-links{
+    gap: 1.5em;
+}
+
+.nav-links a{
+    text-decoration: none;
+    font-family: carter;
+    color: var(--clr2);
+    letter-spacing: 0.1em;
+    font-size: 3em;
+}
+
+.router-link-active.router-link-exact-active{
+    color: var(--clr4);
 }
 
 /* FILTERS TAB */
@@ -226,6 +248,18 @@ header nav h1{
 
 .flex.column{
     flex-direction: column;
+}
+
+.flex.wrap{
+    flex-wrap: wrap;
+}
+
+/* .flex.justify-center{
+    justify-content: center;
+} */
+
+.flex.space-between{
+    justify-content: space-between;
 }
 
 /* HELPERS */

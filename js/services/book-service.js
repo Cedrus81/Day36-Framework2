@@ -18,7 +18,7 @@ function query() {
 }
 
 function get(bookId) {
-    return storageService.get(BOOKS_KEY, carId)
+    return storageService.get(BOOKS_KEY, bookId)
 }
 
 function remove(bookId) {

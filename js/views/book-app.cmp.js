@@ -1,31 +1,32 @@
 import { bookService } from '../services/book-service.js'
-import bookFilters from './book-filters.cmp.js'
-import bookList from './book-list.cmp.js'
-import bookDetails from './book-details.cmp.js'
+import bookFilters from '../cmps/book-filters.cmp.js'
+import bookList from '../cmps/book-list.cmp.js'
+// import bookDetails from './book-details.cmp.js'
 
+{/* <book-details 
+:class="screenStyle"
+:book="selectedBook" />
+ */}
+// isScreen: false,
+// <div class="main-screen" 
+// @click="isScreen = !isScreen" 
+// :class="screenStyle">
+// </div>
 
 export default {
     template: `
         <main>
-        <div class="main-screen" 
-        @click="isScreen = !isScreen" 
-        :class="screenStyle">
-        </div>
 
         <book-filters @filtered="setFilter" />
 
         <book-list
+        v-if="books"
         :books="booksToShow" 
         @selected="selectBook" />
-        
-        <book-details 
-        :class="screenStyle"
-        :book="selectedBook" />
         </main>
         `,
     data() {
         return {
-            isScreen: false,
             selectedBook: '',
             filterBy: null,
             books: null
@@ -43,7 +44,7 @@ export default {
         },
         selectBook(book) {
             this.selectedBook = book
-            this.isScreen = true
+            // this.isScreen = true
         }
     },
     computed: {
@@ -52,13 +53,12 @@ export default {
             const regex = new RegExp(this.filterBy.text, 'i')
             return this.books.filter(book => (book.listPrice.amount < this.filterBy.price && regex.test(book.title)))
         },
-        screenStyle() {
-            return { on: this.isScreen === true }
-        },
+        // screenStyle() {
+        //     return { on: this.isScreen === true }
+        // },
     },
     components: {
         bookFilters,
         bookList,
-        bookDetails
     }
 }

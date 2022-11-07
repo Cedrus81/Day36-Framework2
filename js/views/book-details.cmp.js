@@ -1,9 +1,8 @@
-import longText from './long-text.cmp.js'
-
+import longText from '../cmps/long-text.cmp.js'
+import { bookService } from '../services/book-service.js';
 export default {
-    props: ['book'],
     template: `
-    <section v-if="book" class="modal flex column align-center">
+    <section v-if="book" class="modal on flex column align-center">
         <img :src="book.thumbnail" alt="" />
         <h1>{{ book.title }} // By {{formattedAuthors}}</h1>
         <h2>{{ setLevel }}</h2>
@@ -17,6 +16,15 @@ export default {
         </p>
         <h2 :class="priceLevel">{{ formattedPrice }}</h2>
     </section>`,
+    data() {
+        return {
+            book: null
+        }
+    },
+    created() {
+        bookService.get(this.$route.params.id)
+            .then(book => this.book = book)
+    },
     computed: {
         formattedAuthors() {
             if (this.book.authors) {

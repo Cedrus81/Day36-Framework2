@@ -1,9 +1,15 @@
 const { createApp } = Vue
-import bookApp from './cmps/book-app.cmp.js'
+const { createRouter, createWebHashHistory } = VueRouter
+
+import bookApp from './views/book-app.cmp.js'
 import appHeader from './cmps/app-header.js'
+import homePage from './views/home-page.cmp.js'
+import aboutPage from './views/about-page.cmp.js'
+import bookDetails from './views/book-details.cmp.js'
+
 const options = {
     template: `<app-header />
-    <book-app />
+    <router-view />
     `,
     components: {
         bookApp,
@@ -11,6 +17,33 @@ const options = {
     }
 }
 
+const routerOptions = {
+    history: createWebHashHistory(),
+    routes: [
+        {
+            path: '/',
+            component: homePage
+        },
+        {
+            path: '/about',
+            component: aboutPage
+        },
+        {
+            path: '/books',
+            component: bookApp
+        },
+        {
+            path: '/books/:id',
+            component: bookDetails
+        },
+        // {
+        //     path: '/books/edit/:id?',
+        //     component: bookEdit
+        // },
+    ]
+}
 
-createApp(options)
-    .mount('#app')
+const app = createApp(options)
+const router = createRouter(routerOptions)
+app.use(router)
+app.mount('#app')
