@@ -1,6 +1,6 @@
 export default {
-    template: `
-    <div class="filters-container full">
+    template: /*html*/`
+    <div class="filters-container">
             <h2>Search Filters:</h2>
 
             <div class="form-group input-box">
