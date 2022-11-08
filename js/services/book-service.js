@@ -1,8 +1,12 @@
 import { utilService } from './util-service.js'
 import { storageService } from './async-storage.service.js'
 import gBooks from '../../books.json' assert {type: 'json'}
+import gNewBooks from '../../sample-call.json' assert {type: 'json'}
+const API_KEY = 'AIzaSyD5Ji4oUkcS9YNeQ_nlEuTedQG6ZZVKsww'
 const BOOKS_KEY = 'books'
+const NEW_BOOKS_KEY = 'new'
 _createBooks()
+_loadNewBooks()
 
 export const bookService = {
     query,
@@ -11,12 +15,20 @@ export const bookService = {
     save,
     getEmptyBook,
     addReview,
-    deleteReview
+    deleteReview,
+    queryNewBooks,
+    createListPrice
 }
 
 function query() {
     // return utilService.loadFromStorage(BOOKS_KEY)
     return storageService.query(BOOKS_KEY)
+}
+
+function queryNewBooks(title) {
+    // return storageService.query(NEW_BOOKS_KEY)
+    return fetch(`https://www.googleapis.com/books/v1/volumes?q=${title}+intitle:keyes&key=${API_KEY}`)
+        .then(list => list.json())
 }
 
 function get(bookId) {
@@ -57,6 +69,15 @@ function _createBooks() {
     }
 }
 
+function _loadNewBooks() {
+    let newBooks = utilService.loadFromStorage(NEW_BOOKS_KEY)
+    if (!newBooks || !newBooks.length) {
+        newBooks = gNewBooks.items
+        utilService.saveToStorage(NEW_BOOKS_KEY, newBooks)
+    }
+}
+
+
 function addReview(bookId, review) {
     return get(bookId)
         .then(book => {
@@ -73,3 +94,13 @@ function deleteReview(bookId, idx) {
             return save(book)
         })
 }
+
+
+function createListPrice() {
+    let number = utilService.getRandomInt(250, 1)
+    return {
+        amount: number,
+        currencyCode: utilService.getRandomCurrency(),
+        isOnSale: number % 2 === 0 ? true : false,
+    }
+} 

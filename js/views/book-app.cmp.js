@@ -8,14 +8,15 @@ import addBook from '../cmps/book-add.cmp.js'
 
 export default {
     template:/*html*/`
-            
-            <book-filters @filtered="setFilter" />
-            <add-book />
+            <div class="list-header">
+                <book-filters @filtered="setFilter" />
+                <add-book />
+            </div>
             <main>
-            <book-list
-            v-if="books"
-            :books="booksToShow" 
-            @selected="selectBook" />
+                <book-list
+                v-if="books"
+                :books="booksToShow" 
+                @selected="selectBook" />
             </main>
         `,
     data() {

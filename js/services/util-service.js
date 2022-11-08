@@ -1,7 +1,9 @@
 export const utilService = {
     saveToStorage,
     loadFromStorage,
-    makeId
+    makeId,
+    getRandomInt,
+    getRandomCurrency,
 }
 
 function saveToStorage(key, value) {
@@ -20,4 +22,15 @@ function makeId(length = 5) {
         txt += possible.charAt(Math.floor(Math.random() * possible.length))
     }
     return txt
+}
+
+function getRandomInt(max, min) {
+    return Math.floor(Math.random() * max) + min
+}
+
+function getRandomCurrency() {
+    let number = Math.random() * 3
+    if (number > 2) return 'EUR'
+    if (number > 1) return 'ILS'
+    return 'USD'
 }

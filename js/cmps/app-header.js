@@ -1,5 +1,11 @@
+import addBook from '../cmps/book-add.cmp.js'
+
+
+addBook
+
+
 export default {
-    template: `
+    template: /*html*/`
     <header class="full">
         <nav class="flex wrap space-between">
             <div class="logo flex wrap align-center">
