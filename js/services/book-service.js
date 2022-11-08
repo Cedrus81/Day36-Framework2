@@ -1,6 +1,6 @@
 import { utilService } from './util-service.js'
 import { storageService } from './async-storage.service.js'
-
+import gBooks from '../../books.json' assert {type: 'json'}
 const BOOKS_KEY = 'books'
 _createBooks()
 
@@ -51,29 +51,25 @@ function getEmptyBook() {
 function _createBooks() {
     let books = utilService.loadFromStorage(BOOKS_KEY)
     if (!books || !books.length) {
-        fetch('../books.json')
-            .catch(console.log)
-            .then(res => res.json())
-            .then(res => {
-                books = res
-                utilService.saveToStorage(BOOKS_KEY, books)
-            })
+        books = gBooks
+        utilService.saveToStorage(BOOKS_KEY, books)
+
     }
 }
 
 function addReview(bookId, review) {
-    get(bookId)
+    return get(bookId)
         .then(book => {
             if (!book.reviews) book.reviews = []
             book.reviews.push(review)
-            save(book)
+            return save(book)
         })
 }
 
 function deleteReview(bookId, idx) {
-    get(bookId)
+    return get(bookId)
         .then(book => {
             book.reviews.splice(idx, 1)
-            save(book)
+            return save(book)
         })
 }

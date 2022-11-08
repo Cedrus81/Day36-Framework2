@@ -1,7 +1,5 @@
-import { bookService } from '../services/book-service.js'
 
 export default {
-    props: ['id'],
     template: `
     <form :onsubmit="saveReview">
         <h2>Leave a Review:</h2>
@@ -50,8 +48,8 @@ export default {
                 reviewText: this.reviewText,
             }
             console.log(review)
-            bookService.addReview(this.id, review)
-            this.resetForm
+            this.$emit('reviewed', review)
+            this.resetForm()
         },
         resetForm() {
             this.name = null

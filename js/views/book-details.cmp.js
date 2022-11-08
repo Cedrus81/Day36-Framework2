@@ -24,7 +24,7 @@ export default {
                 <h2 :class="priceLevel">{{ formattedPrice }}</h2>
             </div>
             <img :src="book.thumbnail" alt="" />
-            <add-review :id="book.id" />
+            <add-review @reviewed="addReview" />
             <review-list 
             v-if="book.reviews"
             :reviews="book.reviews" 
@@ -39,7 +39,6 @@ export default {
     created() {
         bookService.get(this.$route.params.id)
             .then(book => this.book = book)
-        eventBus.on()
     },
     computed: {
         formattedAuthors() {
@@ -73,12 +72,22 @@ export default {
     },
     methods: {
         reviewDeleted(idx) {
-            bookService.deleteReview(this.book.id, idx)
+            bookService.deleteReview(this.book.id, idx).then(book => {
+                this.book = book
+                eventBus.emit("user-msg", { txt: `${this.book.title}'s review has been deleted`, type: 'error' });
+            })
+        },
+        addReview(review) {
+            bookService.addReview(this.book.id, review).then(book => {
+                this.book = book
+                eventBus.emit("user-msg", { txt: `${this.book.title}'s review has been added`, type: 'success' });
+            })
         }
     },
     components: {
         longText,
         addReview,
         reviewList
-    }
+    },
 }
+

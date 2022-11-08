@@ -4,19 +4,19 @@ import { eventBus } from '../services/event-bus.service.js'
 
 import bookFilters from '../cmps/book-filters.cmp.js'
 import bookList from '../cmps/book-list.cmp.js'
-// import bookDetails from './book-details.cmp.js'
+import addBook from '../cmps/book-add.cmp.js'
 
 export default {
-    template: `
-        <main>
-
-        <book-filters @filtered="setFilter" />
-
-        <book-list
-        v-if="books"
-        :books="booksToShow" 
-        @selected="selectBook" />
-        </main>
+    template:/*html*/`
+            
+            <book-filters @filtered="setFilter" />
+            <add-book />
+            <main>
+            <book-list
+            v-if="books"
+            :books="booksToShow" 
+            @selected="selectBook" />
+            </main>
         `,
     data() {
         return {
@@ -37,7 +37,6 @@ export default {
         },
         selectBook(book) {
             this.selectedBook = book
-            // this.isScreen = true
         }
     },
     computed: {
@@ -53,5 +52,6 @@ export default {
     components: {
         bookFilters,
         bookList,
+        addBook
     }
 }

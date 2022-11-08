@@ -23,7 +23,6 @@ export default {
         },
         deleteReview(idx, name) {
             this.$emit('reviewDeleted', idx)
-            eventBus.emit("user-msg", { txt: `${name}'s review has been deleted`, type: 'success' });
 
         }
     }
